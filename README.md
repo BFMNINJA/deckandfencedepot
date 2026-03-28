@@ -1,36 +1,82 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Deck and Fence Depot
+
+Modern, responsive website for **Deck and Fence Depot** — a premium lumber and hardware supplier in Stouffville, Ontario.
+
+## Tech Stack
+
+- **Next.js 15** (App Router)
+- **TypeScript**
+- **Tailwind CSS**
+- **Framer Motion** (animations)
+- **GoHighLevel** (forms/CRM — integration ready)
+- **Contabo VPS** (hosting target)
 
 ## Getting Started
 
-First, run the development server:
-
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Production Build
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run build
+npm start
+```
 
-## Learn More
+## Pages
 
-To learn more about Next.js, take a look at the following resources:
+| Route | Description |
+|---|---|
+| `/` | Home — hero video, categories, featured products, gallery, CTA |
+| `/about` | About — story, stats, who we serve, values, testimonials |
+| `/shop` | Product catalog — filtering, sorting, 12 products |
+| `/shop/[slug]` | Product detail — variants, pricing, quote CTA |
+| `/gallery` | Masonry gallery — scroll animations, category filter |
+| `/contact` | Contact — GHL form placeholder, map, business info |
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Project Structure
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```
+src/
+├── app/                    # Pages and routing
+├── components/
+│   ├── layout/             # Navbar, Footer
+│   ├── sections/           # Page sections (Hero, Categories, etc.)
+│   │   └── about/          # About page sections
+│   └── ui/                 # Reusable components (Button, etc.)
+├── lib/                    # Utilities, product data, metadata
+└── types/                  # TypeScript interfaces
+```
 
-## Deploy on Vercel
+## Key Files
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- **Products** — `src/lib/products.ts` (add/edit products here)
+- **SEO** — `src/lib/metadata.ts` (site-wide metadata config)
+- **GHL Integration** — see `GHL_INTEGRATION.md`
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Before Launch Checklist
+
+- [ ] Add real product images to `/public/images`
+- [ ] Replace GHL form placeholders with embed codes
+- [ ] Add Google Maps iframe on contact page
+- [ ] Update business contact info (phone, email, address)
+- [ ] Add favicon and OG image
+- [ ] Configure domain DNS on Contabo
+
+## Deployment (Contabo)
+
+```bash
+npm run build
+# Transfer to server, then:
+pm2 start npm --name "deckandfencedepot" -- start
+```
+
+Nginx reverse proxy config needed — see deployment docs.
+
+## License
+
+Proprietary — Deck and Fence Depot
